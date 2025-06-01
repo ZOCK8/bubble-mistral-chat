@@ -75,7 +75,7 @@ const Index = () => {
 
     try {
       const conversationHistory = messages.map(msg => ({
-        role: msg.isUser ? 'user' : 'assistant' as const,
+        role: (msg.isUser ? 'user' : 'assistant') as const,
         content: msg.content
       }));
 
