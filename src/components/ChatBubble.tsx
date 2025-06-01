@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { Heart, Sparkles } from 'lucide-react';
+import { Heart, Sparkles, Bot, User } from 'lucide-react';
 
 interface ChatBubbleProps {
   message: string;
@@ -19,8 +19,8 @@ const ChatBubble = ({ message, isUser, timestamp, isTyping }: ChatBubbleProps) =
       {/* AI Avatar */}
       {!isUser && (
         <div className="flex-shrink-0 mr-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 flex items-center justify-center shadow-lg">
-            <Sparkles className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-700 flex items-center justify-center shadow-lg border border-gray-700">
+            <Bot className="w-5 h-5 text-white" />
           </div>
         </div>
       )}
@@ -30,19 +30,18 @@ const ChatBubble = ({ message, isUser, timestamp, isTyping }: ChatBubbleProps) =
         isUser ? "order-1" : "order-2"
       )}>
         <div className={cn(
-          "px-6 py-4 rounded-3xl shadow-lg backdrop-blur-sm relative overflow-hidden",
+          "px-6 py-4 rounded-3xl shadow-lg backdrop-blur-sm relative overflow-hidden border",
           isUser 
-            ? "bg-gradient-to-br from-blue-500 via-purple-600 to-pink-600 text-white rounded-br-lg" 
-            : "bg-white/90 border border-purple-200 text-gray-800 rounded-bl-lg"
+            ? "bg-gradient-to-br from-blue-600 via-purple-600 to-blue-700 text-white rounded-br-lg border-blue-500/20" 
+            : "bg-gray-800/90 border-gray-700 text-gray-100 rounded-bl-lg"
         )}>
-          {/* Decorative elements for AI messages */}
+          {/* Subtle glow effects */}
           {!isUser && (
-            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full opacity-50 -translate-y-8 translate-x-8"></div>
+            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full opacity-50 -translate-y-8 translate-x-8"></div>
           )}
           
-          {/* Sparkle effect for user messages */}
           {isUser && (
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           )}
           
           {isTyping ? (
@@ -52,7 +51,7 @@ const ChatBubble = ({ message, isUser, timestamp, isTyping }: ChatBubbleProps) =
                 <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                 <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
               </div>
-              <span className="text-sm text-purple-600 ml-2">Luna tippt...</span>
+              <span className="text-sm text-purple-300 ml-2">Luna tippt...</span>
             </div>
           ) : (
             <>
@@ -60,7 +59,7 @@ const ChatBubble = ({ message, isUser, timestamp, isTyping }: ChatBubbleProps) =
               <div className="flex items-center justify-between mt-3">
                 <p className={cn(
                   "text-xs opacity-70 relative z-10",
-                  isUser ? "text-white/80" : "text-gray-500"
+                  isUser ? "text-blue-100" : "text-gray-400"
                 )}>
                   {timestamp}
                 </p>
@@ -76,16 +75,16 @@ const ChatBubble = ({ message, isUser, timestamp, isTyping }: ChatBubbleProps) =
         <div className={cn(
           "absolute top-4 w-0 h-0",
           isUser 
-            ? "right-0 border-l-[12px] border-l-blue-500 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent translate-x-1"
-            : "left-0 border-r-[12px] border-r-white/90 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent -translate-x-1"
+            ? "right-0 border-l-[12px] border-l-blue-600 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent translate-x-1"
+            : "left-0 border-r-[12px] border-r-gray-800 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent -translate-x-1"
         )}></div>
       </div>
       
       {/* User Avatar */}
       {isUser && (
         <div className="flex-shrink-0 ml-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-            <span className="text-white font-semibold text-sm">Du</span>
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center shadow-lg border border-gray-700">
+            <User className="text-white h-5 w-5" />
           </div>
         </div>
       )}

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Send, Heart, Sparkles } from 'lucide-react';
+import { Send, Heart, Sparkles, Smile } from 'lucide-react';
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
@@ -34,9 +34,9 @@ const ChatInput = ({ onSendMessage, disabled }: ChatInputProps) => {
   ];
 
   return (
-    <div className="p-6 bg-gradient-to-t from-purple-50 to-white border-t border-purple-200 relative">
-      {/* Decorative background */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"></div>
+    <div className="p-6 bg-gray-800/95 backdrop-blur-sm border-t border-gray-700 relative">
+      {/* Subtle glow at top */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
       
       {/* Quick message buttons */}
       <div className="flex flex-wrap gap-2 mb-4">
@@ -46,7 +46,7 @@ const ChatInput = ({ onSendMessage, disabled }: ChatInputProps) => {
             variant="outline"
             size="sm"
             onClick={() => setMessage(quickMsg)}
-            className="text-xs bg-gradient-to-r from-purple-100 to-pink-100 border-purple-200 hover:from-purple-200 hover:to-pink-200 transition-all duration-300 rounded-full"
+            className="text-xs bg-gray-700/50 border-gray-600 hover:bg-gray-600/70 text-gray-300 hover:text-white transition-all duration-300 rounded-full backdrop-blur-sm"
             disabled={disabled}
           >
             {quickMsg}
@@ -61,11 +61,11 @@ const ChatInput = ({ onSendMessage, disabled }: ChatInputProps) => {
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Schreibe Luna eine süße Nachricht... 💕"
-            className="resize-none min-h-[50px] max-h-32 rounded-3xl border-2 border-purple-200 focus:border-purple-400 bg-white/80 backdrop-blur-sm shadow-sm transition-all duration-300 text-sm"
+            className="resize-none min-h-[50px] max-h-32 rounded-3xl border-2 border-gray-600 focus:border-purple-500 bg-gray-700/70 backdrop-blur-sm shadow-sm transition-all duration-300 text-sm text-gray-100 placeholder-gray-400"
             disabled={disabled}
           />
           {/* Character count */}
-          <div className="absolute bottom-2 right-12 text-xs text-gray-400">
+          <div className="absolute bottom-2 right-12 text-xs text-gray-500">
             {message.length}/500
           </div>
         </div>
@@ -74,17 +74,17 @@ const ChatInput = ({ onSendMessage, disabled }: ChatInputProps) => {
           <Button
             variant="outline"
             size="sm"
-            className="h-12 w-12 rounded-full border-2 border-pink-300 hover:bg-pink-50 transition-all duration-300 hover:scale-105"
+            className="h-12 w-12 rounded-full border-2 border-pink-500/50 hover:bg-pink-500/20 hover:border-pink-400 transition-all duration-300 hover:scale-105 bg-gray-700/50 backdrop-blur-sm"
             disabled={disabled}
           >
-            <Heart className="h-4 w-4 text-pink-500" />
+            <Heart className="h-4 w-4 text-pink-400" />
           </Button>
           
           <Button
             onClick={handleSend}
             disabled={!message.trim() || disabled}
             size="sm"
-            className="h-12 w-12 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 disabled:opacity-50 transition-all duration-300 hover:scale-105 shadow-lg"
+            className="h-12 w-12 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 hover:from-purple-700 hover:via-pink-700 hover:to-purple-800 disabled:opacity-50 transition-all duration-300 hover:scale-105 shadow-lg border border-purple-500/20"
           >
             {disabled ? (
               <Sparkles className="h-4 w-4 animate-spin" />

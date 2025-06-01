@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import ChatHeader from '@/components/ChatHeader';
 import ChatBubble from '@/components/ChatBubble';
@@ -18,7 +19,7 @@ const Index = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: 'Hallo! Ich bin dein AI-Assistent. Wie kann ich dir heute helfen? 😊',
+      content: 'Hallo! Ich bin Luna, deine AI-Assistentin. Wie kann ich dir heute helfen? 😊',
       isUser: false,
       timestamp: new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
     }
@@ -28,7 +29,7 @@ const Index = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [settings, setSettings] = useState({
     aiName: 'Luna AI',
-    theme: 'purple',
+    theme: 'dark',
     temperature: 0.7,
     maxTokens: 1000,
     nsfw: true,
@@ -45,21 +46,6 @@ const Index = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-
-  const getThemeClasses = () => {
-    switch (settings.theme) {
-      case 'blue':
-        return 'bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-200';
-      case 'red':
-        return 'bg-gradient-to-br from-red-50 via-pink-100 to-rose-200';
-      case 'green':
-        return 'bg-gradient-to-br from-green-50 via-emerald-100 to-teal-200';
-      case 'dark':
-        return 'bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white';
-      default:
-        return 'bg-gradient-to-br from-purple-50 via-pink-100 to-red-100';
-    }
-  };
 
   const handleSendMessage = async (messageText: string) => {
     const userMessage: Message = {
@@ -115,10 +101,11 @@ const Index = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col max-w-md mx-auto bg-white shadow-2xl relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full -translate-y-48 translate-x-48 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-blue-200/30 to-purple-200/30 rounded-full translate-y-40 -translate-x-40 blur-3xl"></div>
+    <div className="h-screen flex flex-col max-w-md mx-auto bg-gray-900 shadow-2xl relative overflow-hidden border border-gray-800">
+      {/* Subtle dark gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-full -translate-y-48 translate-x-48 blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-pink-900/20 to-purple-900/20 rounded-full translate-y-40 -translate-x-40 blur-3xl"></div>
       
       <ChatHeader
         onSettingsClick={() => setShowSettings(true)}
@@ -126,7 +113,7 @@ const Index = () => {
         isOnline={true}
       />
       
-      <div className={`flex-1 overflow-y-auto p-6 ${getThemeClasses()} relative z-10`}>
+      <div className="flex-1 overflow-y-auto p-6 bg-gray-900/95 backdrop-blur-sm relative z-10">
         {messages.map((message) => (
           <ChatBubble
             key={message.id}
