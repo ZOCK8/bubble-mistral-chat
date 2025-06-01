@@ -49,15 +49,15 @@ const Index = () => {
   const getThemeClasses = () => {
     switch (settings.theme) {
       case 'blue':
-        return 'bg-gradient-to-br from-blue-100 to-blue-200';
+        return 'bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-200';
       case 'red':
-        return 'bg-gradient-to-br from-red-100 to-pink-200';
+        return 'bg-gradient-to-br from-red-50 via-pink-100 to-rose-200';
       case 'green':
-        return 'bg-gradient-to-br from-green-100 to-emerald-200';
+        return 'bg-gradient-to-br from-green-50 via-emerald-100 to-teal-200';
       case 'dark':
-        return 'bg-gradient-to-br from-gray-800 to-gray-900';
+        return 'bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white';
       default:
-        return 'bg-gradient-to-br from-purple-100 to-pink-200';
+        return 'bg-gradient-to-br from-purple-50 via-pink-100 to-red-100';
     }
   };
 
@@ -115,14 +115,18 @@ const Index = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col max-w-md mx-auto bg-white shadow-xl relative">
+    <div className="h-screen flex flex-col max-w-md mx-auto bg-white shadow-2xl relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full -translate-y-48 translate-x-48 blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-blue-200/30 to-purple-200/30 rounded-full translate-y-40 -translate-x-40 blur-3xl"></div>
+      
       <ChatHeader
         onSettingsClick={() => setShowSettings(true)}
         aiName={settings.aiName}
         isOnline={true}
       />
       
-      <div className={`flex-1 overflow-y-auto p-4 ${getThemeClasses()}`}>
+      <div className={`flex-1 overflow-y-auto p-6 ${getThemeClasses()} relative z-10`}>
         {messages.map((message) => (
           <ChatBubble
             key={message.id}

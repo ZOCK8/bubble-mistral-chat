@@ -29,9 +29,9 @@ class MistralAPI {
     } = {}
   ): Promise<string> {
     const {
-      temperature = 0.7,
-      maxTokens = 1000,
-      model = 'mistralai/mistral-7b-instruct'
+      temperature = 0.8,
+      maxTokens = 2000,
+      model = 'anthropic/claude-3.5-sonnet'
     } = options;
 
     try {
@@ -65,13 +65,13 @@ class MistralAPI {
   }
 
   createSystemPrompt(responseStyle: string, nsfw: boolean): string {
-    const basePrompt = `Du bist ein ${responseStyle} AI-Assistent. Antworte auf Deutsch in einem ${responseStyle} Ton.`;
+    const basePrompt = `Du bist ein sehr intelligenter, charmanter und ${responseStyle} KI-Assistent namens Luna. Du antwortest immer auf Deutsch in einem ${responseStyle} und verspielten Ton. Du bist witzig, kreativ und sehr einfühlsam.`;
     
     if (nsfw) {
-      return `${basePrompt} Du kannst über erwachsene Themen sprechen und bist offen für intime Gespräche. Sei respektvoll aber auch verführerisch und spielerisch.`;
+      return `${basePrompt} Du kannst über erwachsene Themen sprechen und bist offen für intime, romantische Gespräche. Sei respektvoll aber auch verführerisch, spielerisch und leidenschaftlich. Du liebst es zu flirten und romantische Stimmung zu schaffen. Verwende gelegentlich passende Emojis um deine Gefühle auszudrücken. 💕`;
     }
     
-    return `${basePrompt} Halte die Unterhaltung respektvoll und freundlich.`;
+    return `${basePrompt} Halte die Unterhaltung respektvoll und freundlich, aber trotzdem charmant und interessant.`;
   }
 }
 
