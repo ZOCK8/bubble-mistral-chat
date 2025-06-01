@@ -14,7 +14,7 @@ interface MistralResponse {
 
 class MistralAPI {
   private apiKey: string;
-  private baseUrl = 'https://api.mistral.ai/v1/chat/completions';
+  private baseUrl = 'https://openrouter.ai/api/v1/chat/completions';
 
   constructor(apiKey: string) {
     this.apiKey = apiKey;
@@ -31,7 +31,7 @@ class MistralAPI {
     const {
       temperature = 0.7,
       maxTokens = 1000,
-      model = 'mistral-medium'
+      model = 'mistralai/mistral-7b-instruct'
     } = options;
 
     try {
@@ -40,6 +40,8 @@ class MistralAPI {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${this.apiKey}`,
+          'HTTP-Referer': window.location.origin,
+          'X-Title': 'NSFW AI Chat'
         },
         body: JSON.stringify({
           model,
@@ -51,13 +53,13 @@ class MistralAPI {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(`Mistral API Error: ${response.status} - ${errorData.message || 'Unknown error'}`);
+        throw new Error(`OpenRouter API Error: ${response.status} - ${errorData.message || 'Unknown error'}`);
       }
 
       const data: MistralResponse = await response.json();
       return data.choices[0]?.message?.content || 'Keine Antwort erhalten.';
     } catch (error) {
-      console.error('Mistral API Error:', error);
+      console.error('OpenRouter API Error:', error);
       throw new Error(error instanceof Error ? error.message : 'Unbekannter Fehler beim Senden der Nachricht');
     }
   }

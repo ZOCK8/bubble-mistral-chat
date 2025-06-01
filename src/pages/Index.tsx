@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import ChatHeader from '@/components/ChatHeader';
 import ChatBubble from '@/components/ChatBubble';
@@ -37,7 +36,7 @@ const Index = () => {
   });
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const mistralApi = new MistralAPI('451d5e98-3182-4cc2-8863-485f28981683');
+  const mistralApi = new MistralAPI('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');
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
