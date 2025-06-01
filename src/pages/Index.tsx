@@ -74,10 +74,13 @@ const Index = () => {
     setIsLoading(true);
 
     try {
-      const conversationHistory = messages.map(msg => ({
-        role: (msg.isUser ? 'user' : 'assistant') as const,
-        content: msg.content
-      }));
+      const conversationHistory = messages.map(msg => {
+        const role: 'user' | 'assistant' = msg.isUser ? 'user' : 'assistant';
+        return {
+          role,
+          content: msg.content
+        };
+      });
 
       const systemPrompt = mistralApi.createSystemPrompt(settings.responseStyle, settings.nsfw);
       
